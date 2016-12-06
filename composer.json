@@ -14,18 +14,19 @@
     "homepage": "https://github.com/kunicmarko20/static-translation",
     "license": "MIT",
     "require": {
-        "php": ">=5.3.2",
+        "php": "^5.5|^7.0",
         "symfony/framework-bundle": "~2.8|~3.0",
         "phpoffice/phpexcel": "~1.8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.6"
     },
     "autoload": {
         "psr-4": {
             "KunicMarko\\StaticTranslationBundle\\": ""
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "KunicMarko\\StaticTranslationBundle\\": ""
-        }
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     }
 }

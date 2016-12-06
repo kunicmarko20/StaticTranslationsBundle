@@ -19,7 +19,6 @@
         "phpoffice/phpexcel": "~1.8.1"
     },
     "autoload": {
-        "exclude-from-classmap": ["/Tests/"],
         "psr-4": {
             "KunicMarko\\StaticTranslationBundle\\": ""
         }

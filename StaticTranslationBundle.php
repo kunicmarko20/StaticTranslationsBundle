@@ -1,6 +1,6 @@
 <?php
 
-namespace StaticTranslationBundle;
+namespace KunicMarko\StaticTranslationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

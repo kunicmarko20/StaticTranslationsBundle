@@ -1,6 +1,6 @@
 <?php
 
-namespace StaticTranslationBundle\Command;
+namespace KunicMarko\StaticTranslationBundle\Command;
 
 use PHPExcel_IOFactory;
 use Symfony\Component\Console\Style\SymfonyStyle;

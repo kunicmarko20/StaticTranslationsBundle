@@ -71,7 +71,11 @@ class TranslateCommand extends ContainerAwareCommand
         $worksheet = $objPHPExcel->getActiveSheet();
         $lastRow = $worksheet->getHighestRow();
         for ($row = 3; $row <= $lastRow; $row++) {
-                        
+            
+            if(trim($worksheet->getCell('A'.$row)) == "" && trim($worksheet->getCell($this->currentLanguage.$row)) == ""){
+                break;
+            }          
+            
             $target = $worksheet->getCell($this->currentLanguage.$row);
             
             if($worksheet->getCell($this->labelColumn.$row) != "" && !$this->handleLabels($worksheet,$row,$target)){
@@ -80,7 +84,7 @@ class TranslateCommand extends ContainerAwareCommand
             
             $source = $this->currentLanguage == 'A' ? $target : $worksheet->getCell('A'.$row); 
             if($this->checkIfIdExists(str_replace(' ', '_', $source))) continue;
-            $this->body->appendChild($this->createTranslationElement($target,$source));
+            $this->body->appendChild($this->createTranslationElement(trim($target),trim($source)));
             
         } 
     }

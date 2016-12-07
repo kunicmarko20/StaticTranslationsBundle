@@ -2,6 +2,14 @@ Symfony Static Translations Bundle
 ============
 This bundle helps you generate translation for static strings in symfony application.
 
+This bundle uses [PHPOffice/PHPExcel](https://github.com/PHPOffice/PHPExcel) bundle and
+
+## PHPExcel bundle Requirements
+ * PHP version 5.2.0 or higher
+ * PHP extension php_zip enabled (required if you need PHPExcel to handle .xlsx .ods or .gnumeric files)
+ * PHP extension php_xml enabled
+ * PHP extension php_gd2 enabled (optional, but required for exact column width autocalculation)
+
 
 ## Installation
 
@@ -31,7 +39,7 @@ Command accepts 2 parameters, you can run it without parameters and then you get
 
 Provide path to your Excel file that has to end with ``.xlsx``
 
-Formating of Excel file:
+Formating of Excel file ( can also be found [here](https://docs.google.com/spreadsheets/d/1-eIna3LE16ViSWIp91YMheAZ3nXVN1hnGsYkR_dLxjY)  ):
 
 |   |A            | B              |                                       |
 |---|-------------|----------------| --------------------------------------|

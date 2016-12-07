@@ -1,6 +1,6 @@
 {
     "name": "kunicmarko/static-translations",
-    "description": "This is a Symfony2 Bundle that helps you to generate translations for static strings from Excel files, thanks to the PHPExcel library",
+    "description": "This is a Symfony Bundle that helps you to generate translations for static strings from Excel files, thanks to the PHPExcel library",
     "type": "symfony-bundle",
     "authors": [
         {
@@ -14,7 +14,7 @@
     "homepage": "https://github.com/kunicmarko20/static-translation",
     "license": "MIT",
     "require": {
-        "php": "^5.5|^7.0",
+        "php": "^5.2|^7.0",
         "symfony/framework-bundle": "~2.8|~3.0",
         "phpoffice/phpexcel": "~1.8.1"
     },
@@ -25,7 +25,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-dev": "1.0.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }

@@ -1,8 +1,0 @@
-<!-- phpunit.xml.dist -->
-<phpunit bootstrap="vendor/autoload.php" colors="true">
-    <testsuites>
-        <testsuite name="StaticTranslationsBundle Test Suite">
-            <directory>./Tests</directory>
-        </testsuite>
-    </testsuites>
-</phpunit>

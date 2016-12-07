@@ -1,6 +1,6 @@
 <?php
 
-namespace KunicMarko\StaticTranslationBundle\Command;
+namespace KunicMarko\StaticTranslationsBundle\Command;
 
 use PHPExcel_IOFactory;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class StaticTranslateCommand extends ContainerAwareCommand
+class TranslateCommand extends ContainerAwareCommand
 {
     const TranslationDirectory = 'app/Resources/translations/'; 
     
@@ -22,19 +22,25 @@ class StaticTranslateCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('static:translation')
-            ->setDescription('Translate static strings in application.')
+            ->setName('generate:static:translations')
+            ->setDescription('Generate translation files for static strings in application.')
             ->setDefinition(array(
                 new InputArgument('file', InputArgument::REQUIRED, 'Path to Excel file with data for translation'),
                 new InputArgument('languages', InputArgument::IS_ARRAY, 'Array of language codes ( en de fr ).'),
             ))
+            ->setHelp($this->getHelpText()
+            )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->file   = $input->getArgument('file');
-        $languages    = $input->getArgument('languages');
+                
+        if(!$languages = $input->getArgument('languages')){
+           throw new \Exception('Languages can\'t be empty');
+        }
+        
         $this->sourceLanguage = $languages[0];
         $this->labelColumn = $this->num2alpha(count($languages));
 
@@ -171,10 +177,13 @@ class StaticTranslateCommand extends ContainerAwareCommand
                 [5,'Imprint','Impressum','form.about, default.language.source']
             ]
         );
-        $style->text(['We expect words for translation to start from line 3'
-        ,'Labels are optional, there can be more than one label for same word, they just have to be devided by commma (,)'
-        ,'If you add labels, label names will be used for source translation tags in xml'
-        ,'if you want to use default language word for source and use lables for same word, you can use reserved word "default.language.source" and add it in labels part']);
+        $style->text([
+            'We expect words for translation to start from line 3',
+            'You can add more languages, we only expect labels to be at last position',
+            'Labels are optional, there can be more than one label for same word, they just have to be divided by comma (,)',
+            'If you add labels, label names will be used for source translation tags in xml',
+            'if you want to use default language word for source and use labels for same word, you can use reserved word "default.language.source" and add it in labels part'
+        ]);
 
         if (!$input->getArgument('file')) {
             $style->section('Excel file has to end with .xlsx');
@@ -196,8 +205,8 @@ class StaticTranslateCommand extends ContainerAwareCommand
         }
 
         if (!$input->getArgument('languages')) {
-            $style->section('We expect array of language codes, diveded by space e.g. ( en de fr ), use same order as in your excel file');
-            $style->note('Don\'t forget that first language in array is source language and will be used for all source tags');
+            $style->section('We expect array of language codes, divided by space e.g. ( en de fr ), use same order as in your excel file');
+            $style->note('First language in array is source language and will be used for all source tags');
             $answer = $style->ask('Please provide array of language codes', null, function ($languages) {
                 if (empty($languages)) {
                     throw new \Exception('Languages can\'t be empty');
@@ -207,5 +216,34 @@ class StaticTranslateCommand extends ContainerAwareCommand
             });
             $input->setArgument('languages', explode(' ',$answer));
         }
+    }
+    //Help text for command
+    private function getHelpText(){
+        return <<<EOT
+               
+Excel Formating : 
+                    
+--- ---------- ----------- -------------------------------------
+     A          B
+--- ---------- ----------- -------------------------------------
+ 1   English    German
+ 2
+ 3   About Us   Über uns    label.about
+ 4   Contact    Kontakt
+ 5   Imprint    Impressum   form.about, default.language.source
+--- ---------- ----------- -------------------------------------
+                    
+We expect words for translation to start from line 3
+You can add more languages, we only expect labels to be at last position
+Labels are optional, there can be more than one label for same word, they just have to be devided by commma (,)
+If you add labels, label names will be used for source translation tags in xml
+if you want to use default language word for source and use lables for same word, you can use reserved word "default.language.source" and add it in labels part
+                    
+Excel file has to end with .xlsx
+                    
+We expect array of language codes, divided by space e.g. ( en de fr ), use same order as in your excel file
+
+First language in array is source language and will be used for all source tags                   
+EOT;
     }
 }

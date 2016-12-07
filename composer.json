@@ -18,15 +18,14 @@
         "symfony/framework-bundle": "~2.8|~3.0",
         "phpoffice/phpexcel": "~1.8.1"
     },
-    "require-dev": {
-        "phpunit/phpunit": "~4.6"
-    },
     "autoload": {
         "psr-4": {
-            "KunicMarko\\StaticTranslationBundle\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+            "KunicMarko\\StaticTranslationsBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-dev": "1.0.x-dev"
+        }
     }
 }

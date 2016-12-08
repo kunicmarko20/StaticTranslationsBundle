@@ -1,6 +1,6 @@
 {
     "name": "kunicmarko/static-translations",
-    "description": "This is a Symfony Bundle that helps you to generate translations for static strings from Excel files, thanks to the PHPExcel library",
+    "description": "This is a Symfony Bundle that helps you to generate translations for static/hardcoded strings from Excel files, thanks to the PHPExcel library",
     "type": "symfony-bundle",
     "authors": [
         {

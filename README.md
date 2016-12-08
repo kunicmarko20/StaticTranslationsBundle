@@ -2,7 +2,12 @@ Symfony Static Translations Bundle
 ============
 This bundle helps you generate translation for static strings in symfony application.
 
-This bundle uses [PHPOffice/PHPExcel](https://github.com/PHPOffice/PHPExcel) bundle and
+[![Total Downloads](https://poser.pugx.org/kunicmarko/static-translations/downloads)](https://packagist.org/packages/kunicmarko/static-translations)
+[![Latest Stable Version](https://poser.pugx.org/kunicmarko/static-translations/v/stable)](https://packagist.org/packages/kunicmarko/static-translations)
+[![Latest Unstable Version](https://poser.pugx.org/kunicmarko/static-translations/v/unstable)](https://packagist.org/packages/kunicmarko/static-translations)
+[![License](https://poser.pugx.org/kunicmarko/static-translations/license)](https://packagist.org/packages/kunicmarko/static-translations)
+
+This bundle uses [PHPOffice/PHPExcel](https://github.com/PHPOffice/PHPExcel) bundle
 
 ## PHPExcel bundle Requirements
  * PHP version 5.2.0 or higher
@@ -32,7 +37,7 @@ $bundles = array(
 
 ``php app/console generate:static:translation /path/to/excel/file languages``
 
-Command accepts 2 parameters, you can run it without parameters and then you get explanation what you should do
+Command accepts 2 parameters, you can run it without parameters and then you get interactive console with help on how to use command
 
 ## Parameters
 **1.**  Excel file

@@ -55,6 +55,8 @@ class TranslateCommand extends ContainerAwareCommand
             
             $this->currentLanguage = $this->helper->num2alpha($k);
             $this->xml = new \DOMDocument('1.0', 'utf-8');
+            $this->xml->preserveWhiteSpace = false;
+            $this->xml->formatOutput = true;
 
             if($old = file_exists($this->getTranslationFileName($language))){
                 $this->xml->load($this->getTranslationFileName($language));
@@ -68,7 +70,7 @@ class TranslateCommand extends ContainerAwareCommand
             $this->handleBody($file);
             $this->save($language, $sourceLanguage, $old); 
         }
-           
+           $output->writeln('<info>Success, files generated.</info>');
     }
     //prepare body for xml
     private function handleBody($file){       

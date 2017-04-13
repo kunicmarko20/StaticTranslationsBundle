@@ -21,21 +21,21 @@ This bundle uses [PHPOffice/PHPExcel](https://github.com/PHPOffice/PHPExcel) bun
 **1.**  Add to composer.json to the `require` key
 
 ```
-composer require kunicmarko/static-translations
+composer require --dev kunicmarko/static-translations
 ```
 
 **2.** Register the bundle in ``app/AppKernel.php``
 
 ```
-$bundles = array(
+if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
     // ...
-    new KunicMarko\StaticTranslationsBundle\StaticTranslationsBundle(),
-);
+    $bundles[] =  new KunicMarko\StaticTranslationsBundle\StaticTranslationsBundle();
+}
 ```
 
 ## Command
 
-``php app/console generate:static:translation /path/to/excel/file languages``
+``php app/console generate:static:translations /path/to/excel/file languages``
 
 Command accepts 2 parameters, you can run it without parameters and then you get interactive console with help on how to use command
 

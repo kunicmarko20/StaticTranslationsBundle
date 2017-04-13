@@ -1,12 +1,9 @@
-
 parameters:
     translation_directory: '%kernel.root_dir%/Resources/translations/'
 
 services:
     static_translations.command:
         class: KunicMarko\StaticTranslationsBundle\Command\TranslateCommand
-        arguments: ["%translation_directory%","@static_translations.helper.service"]
+        arguments: ["%translation_directory%"]
         tags:
             - { name: console.command }
-    static_translations.helper.service:
-        class: KunicMarko\StaticTranslationsBundle\Services\HelperService

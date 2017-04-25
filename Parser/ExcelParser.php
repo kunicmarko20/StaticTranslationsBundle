@@ -21,7 +21,7 @@ class ExcelParser implements ParserStrategyInterface
     /**
      * {@inheritDoc}
      */
-    public function parse(XMLDocument $xml, string $currentLanguageColumn, string $labelColumn)
+    public function parse(XMLDocument $xml, $currentLanguageColumn, $labelColumn)
     {
         $lastRow = $this->excelReader->getLastRow();
         $body = $xml->getBody();
@@ -55,7 +55,7 @@ class ExcelParser implements ParserStrategyInterface
      * @param string $labelColumn
      * @return bool
      */
-    private function handleLabels(XMLDocument $xml, $row, string $target, string $labelColumn)
+    private function handleLabels(XMLDocument $xml, $row, $target, $labelColumn)
     {
         $labels = $this->excelReader->getCell($labelColumn.$row);
         if (empty($labels)) {

@@ -18,7 +18,7 @@ interface ParserStrategyInterface
      * @param string $labelColumn
      * @return void
      */
-    public function parse(XMLDocument $xml, string $currentLanguageColumn, string $labelColumn);
+    public function parse(XMLDocument $xml, $currentLanguageColumn, $labelColumn);
 
     /**
     * Formats number of column to appropriate name depending on parser

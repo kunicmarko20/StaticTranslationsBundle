@@ -18,7 +18,7 @@ class TranslateCommand extends ContainerAwareCommand
     /** @var string */
     private $translationDirectory;
     
-    public function __construct(string $directory, $name = null)
+    public function __construct($directory, $name = null)
     {
         $this->translationDirectory = $directory;
         parent::__construct($name);

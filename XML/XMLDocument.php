@@ -15,7 +15,7 @@ class XMLDocument
     /** @var string */
     private $fileName;
 
-    public function __construct(string $directory, string $language)
+    public function __construct($directory, $language)
     {
         $this->xml = new \DOMDocument('1.0', 'utf-8');
         $this->xml->preserveWhiteSpace = false;
@@ -27,7 +27,7 @@ class XMLDocument
      * @param string $directory
      * @param string $language
      */
-    public function setFileName(string $directory, string $language)
+    public function setFileName($directory, $language)
     {
         $this->fileName = $directory.sprintf(self::FILE_NAME, $language);
     }
@@ -80,7 +80,7 @@ class XMLDocument
      * @param string $name
      * @return bool
      */
-    public function isElementPresent(string $name)
+    public function isElementPresent($name)
     {
         $name = str_replace(' ', '_', $name);
         $translations = $this->xml->getElementsByTagName(self::TRANSLATION_TAG_NAME);

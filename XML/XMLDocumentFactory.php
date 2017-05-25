@@ -16,7 +16,7 @@ class XMLDocumentFactory
         $xml = new XMLDocument($directory, $currentLanguage);
 
         if (file_exists($xml->getFileName())) {
-            $xml->load();
+            $xml->importFile();
         } else {
             self::buildNewXMLDocument($xml, $sourceLanguage, $directory);
         }

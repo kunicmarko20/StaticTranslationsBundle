@@ -47,7 +47,7 @@ class TranslateCommand extends ContainerAwareCommand
         foreach ($languages as $index => $language) {
             $xml = XMLDocumentFactory::build($sourceLanguage, $this->translationDirectory, $language);
             $parser->parse($xml, $parser::formatColumnName($index), $labelColumn);
-            $xml->save();
+            $xml->exportToFile();
         }
         $output->writeln('<info>Success, files generated.</info>');
     }

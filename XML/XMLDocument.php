@@ -2,24 +2,19 @@
 
 namespace KunicMarko\StaticTranslationsBundle\XML;
 
-use \DOMDocument;
-use \DomNode;
-
-class XMLDocument
+class XMLDocument extends \DOMDocument
 {
-    const FILE_NAME  = 'messages.%s.xliff';
+    const FILE_NAME_PATTERN  = 'messages.%s.xliff';
     const TRANSLATION_TAG_NAME = 'trans-unit';
 
-    /** @var DOMDocument */
-    private $xml;
     /** @var string */
     private $fileName;
 
     public function __construct($directory, $language)
     {
-        $this->xml = new \DOMDocument('1.0', 'utf-8');
-        $this->xml->preserveWhiteSpace = false;
-        $this->xml->formatOutput = true;
+        parent::__construct('1.0', 'utf-8');
+        $this->preserveWhiteSpace = false;
+        $this->formatOutput = true;
         $this->setFileName($directory, $language);
     }
 
@@ -27,17 +22,17 @@ class XMLDocument
      * @param string $directory
      * @param string $language
      */
-    public function setFileName($directory, $language)
+    private function setFileName($directory, $language)
     {
-        $this->fileName = $directory.sprintf(self::FILE_NAME, $language);
+        $this->fileName = $directory.sprintf(self::FILE_NAME_PATTERN, $language);
     }
 
     /**
-     * Load XML from a file
+     * Load existing XML file
      */
-    public function load()
+    public function importFile()
     {
-        $this->xml->load($this->fileName);
+        parent::load($this->fileName);
     }
 
     /**
@@ -49,30 +44,21 @@ class XMLDocument
     }
 
     /**
-     * Adds new child at the end of the children
-     * @param DomNode $child
-     */
-    public function appendChild(DOMNode $child)
-    {
-        $this->xml->appendChild($child);
-    }
-
-    /**
      * Get body tag from XML file
      * @return mixed
      */
     public function getBody()
     {
-        return $this->xml->getElementsByTagName('body')[0];
+        return $this->getElementsByTagName('body')[0];
     }
 
 
     /**
      * Save xml file
      */
-    public function save()
+    public function exportToFile()
     {
-        $this->xml->save($this->fileName);
+        parent::save($this->fileName);
     }
 
     /**
@@ -83,7 +69,7 @@ class XMLDocument
     public function isElementPresent($name)
     {
         $name = str_replace(' ', '_', $name);
-        $translations = $this->xml->getElementsByTagName(self::TRANSLATION_TAG_NAME);
+        $translations = $this->getElementsByTagName(self::TRANSLATION_TAG_NAME);
         
         foreach ($translations as $translation) {
             if ($translation->getAttribute('id') == $name) {
@@ -101,7 +87,7 @@ class XMLDocument
      */
     public function createElement($name, $attributes = null)
     {
-        $element = $this->xml->createElement($name);
+        $element = parent::createElement($name);
         
         if ($attributes === null || empty($attributes)) {
             return $element;
@@ -139,7 +125,7 @@ class XMLDocument
     private function createTextElement($elementName, $text)
     {
         $element = $this->createElement($elementName);
-        $elementText = $this->xml->createTextNode($text);
+        $elementText = $this->createTextNode($text);
         $element->appendChild($elementText);
         return $element;
     }

@@ -20,7 +20,7 @@ class ParserFactory
 
             return new ExcelParser($excelReader);
         }
-        //TODO add additional parser ( maybe CSV )
+        //maybe add additional parser (CSV)
         throw new \RuntimeException('Please provide Excel file for parsing.');
     }
 }

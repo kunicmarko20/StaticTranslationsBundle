@@ -4,7 +4,7 @@ namespace KunicMarko\StaticTranslationsBundle\XML;
 
 class XMLDocument extends \DOMDocument
 {
-    const FILE_NAME_PATTERN  = 'messages.%s.xliff';
+    const FILE_NAME_PATTERN = 'messages.%s.xliff';
     const TRANSLATION_TAG_NAME = 'trans-unit';
 
     /** @var string */
@@ -28,7 +28,7 @@ class XMLDocument extends \DOMDocument
     }
 
     /**
-     * Load existing XML file
+     * Load existing XML file.
      */
     public function importFile()
     {
@@ -44,7 +44,8 @@ class XMLDocument extends \DOMDocument
     }
 
     /**
-     * Get body tag from XML file
+     * Get body tag from XML file.
+     *
      * @return mixed
      */
     public function getBody()
@@ -52,9 +53,8 @@ class XMLDocument extends \DOMDocument
         return $this->getElementsByTagName('body')[0];
     }
 
-
     /**
-     * Save xml file
+     * Save xml file.
      */
     public function exportToFile()
     {
@@ -62,64 +62,75 @@ class XMLDocument extends \DOMDocument
     }
 
     /**
-     * Check if element with given id is present
+     * Check if element with given id is present.
+     *
      * @param string $name
+     *
      * @return bool
      */
     public function isElementPresent($name)
     {
         $name = str_replace(' ', '_', $name);
         $translations = $this->getElementsByTagName(self::TRANSLATION_TAG_NAME);
-        
+
         foreach ($translations as $translation) {
             if ($translation->getAttribute('id') == $name) {
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * Create XML element with attributes
-     * @param string $name
+     * Create XML element with attributes.
+     *
+     * @param string     $name
      * @param array|null $attributes
+     *
      * @return \DOMElement
      */
     public function createElement($name, $attributes = null)
     {
         $element = parent::createElement($name);
-        
+
         if ($attributes === null || empty($attributes)) {
             return $element;
         }
-        
+
         foreach ($attributes as $attribute => $value) {
             $element->setAttribute($attribute, $value);
         }
+
         return $element;
     }
 
     /**
-     * Create XML translation element
+     * Create XML translation element.
+     *
      * @param string $target
      * @param string $source
+     *
      * @return \DOMElement
      */
     public function createTranslationElement($target, $source)
     {
         $trans = $this->createElement(self::TRANSLATION_TAG_NAME, [
-            'id' => str_replace(' ', '_', $source)
+            'id' => str_replace(' ', '_', $source),
         ]);
 
         $trans->appendChild($this->createTextElement('source', $source));
         $trans->appendChild($this->createTextElement('target', $target));
+
         return $trans;
     }
 
     /**
-     * Create XML text element for translation element
+     * Create XML text element for translation element.
+     *
      * @param string $elementName
      * @param string $text
+     *
      * @return \DOMElement
      */
     private function createTextElement($elementName, $text)
@@ -127,6 +138,7 @@ class XMLDocument extends \DOMDocument
         $element = $this->createElement($elementName);
         $elementText = $this->createTextNode($text);
         $element->appendChild($elementText);
+
         return $element;
     }
 }

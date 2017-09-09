@@ -5,10 +5,12 @@ namespace KunicMarko\StaticTranslationsBundle\XML;
 class XMLDocumentFactory
 {
     /**
-     * Build XMLDocument
+     * Build XMLDocument.
+     *
      * @param string $sourceLanguage
      * @param string $directory
      * @param string $currentLanguage
+     *
      * @return XMLDocument
      */
     public static function build($sourceLanguage, $directory, $currentLanguage)
@@ -25,24 +27,25 @@ class XMLDocumentFactory
     }
 
     /**
-     * Add needed elements for new XML file
+     * Add needed elements for new XML file.
+     *
      * @param XMLDocument $xml
-     * @param string $sourceLanguage
-     * @param string $directory
+     * @param string      $sourceLanguage
+     * @param string      $directory
      */
     private static function buildNewXMLDocument(XMLDocument $xml, $sourceLanguage, $directory)
     {
         $body = $xml->createElement('body');
 
         $xliff = $xml->createElement('xliff', [
-            'xmlns' => 'urn:oasis:names:tc:xliff:document:1.2',
-            'version' => '1.2'
+            'xmlns'   => 'urn:oasis:names:tc:xliff:document:1.2',
+            'version' => '1.2',
         ]);
 
         $file = $xml->createElement('file', [
             'source-language' => $sourceLanguage,
-            'datatype' => 'plaintext',
-            'original' => 'file.ext'
+            'datatype'        => 'plaintext',
+            'original'        => 'file.ext',
         ]);
 
         $file->appendChild($body);

@@ -8,16 +8,15 @@ use PHPExcel_IOFactory;
  * Created by PhpStorm.
  * User: markokunic
  * Date: 4/12/17
- * Time: 1:25 PM
+ * Time: 1:25 PM.
  */
 class ExcelReaderAdapter implements ExcelReaderAdapterInterface
 {
-
     /** @var \PHPExcel_Worksheet */
     private $worksheet;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load($file)
     {
@@ -27,7 +26,7 @@ class ExcelReaderAdapter implements ExcelReaderAdapterInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getLastRow()
     {
@@ -35,7 +34,7 @@ class ExcelReaderAdapter implements ExcelReaderAdapterInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCell($cell)
     {

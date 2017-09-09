@@ -7,10 +7,13 @@ use KunicMarko\StaticTranslationsBundle\Adapter\ExcelReaderAdapter;
 class ParserFactory
 {
     /**
-     * Create new Parser based on file extension
+     * Create new Parser based on file extension.
+     *
      * @param string $file
-     * @return ExcelParser
+     *
      * @throws \RuntimeException
+     *
+     * @return ExcelParser
      */
     public static function build($file)
     {
